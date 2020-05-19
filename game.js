@@ -28,7 +28,7 @@ var config = {
 	height: 600,
 	backgroundColor: 0x123456,
 	disableWebAudio: true,
-	scene: [ CaptureScene, StartScene, GameScene, CreditsScene, NextLevelScene, LoseLifeScene, EndScene ],
+	scene: [ StartScene, GameScene, CreditsScene, NextLevelScene, LoseLifeScene, EndScene ],
 	physics: {
 		default: 'arcade',
 		arcade: { debug: false }

@@ -26,14 +26,23 @@ class CreditsScene extends Phaser.Scene{
 		
 		
 		gameState.cursors = this.input.keyboard.createCursorKeys();
-        const lives = this.add.text(125,120,`- CREDITS -`,{fontWeight: 'bold', fontSize: '40px', fill: '#ffffff'})
-        const restart=  this.add.text(80,475,'TAP OR PRESS SPACE TO CONTINUE',{fontWeight: 'bold', fontSize: '20px', fill: '#ffffff'})
+        const title = this.add.text(125,100,`- CREDITS -`,{fontWeight: 'bold', fontSize: '40px', fill: '#ffffff'})
+		const restart=  this.add.text(80,475,'TAP OR PRESS SPACE TO CONTINUE',{fontWeight: 'bold', fontSize: '20px', fill: '#ffffff'})
+		
          
-        this.add.image(140,270,'profile').setScale(0.2);
-        this.add.text(180,270,'<sivwri.io>',{fontWeight: 'bold', fontSize: '20px', fill: '#ffffff'})
+        const profile = this.add.image(400,360,'profile').setScale(0.15);
+		const coding = this.add.text(120,400,'coding <sivwri>',{fontWeight: 'bold', fontSize: '17px', fill: '#ffffff'})
 
-         gameState.centraliseText(lives);
-         gameState.centraliseText(restart);
+		const abstraction = this.add.text(400,190,"Music from 'Ludum Dare 30 Loops' by Abstraction",{fontWeight: 'bold', fontSize: '17px', fill: '#ffffff'})
+		const url = this.add.text(400,215,"http://www.abstractionmusic.com/",{fontWeight: 'bold', fontSize: '17px', fill: '#ffffff'})
+		
+
+
+         gameState.centraliseText(title);
+		 gameState.centraliseText(restart);
+		 gameState.centraliseText(coding);
+		 gameState.centraliseText(url);
+         gameState.centraliseText(abstraction);
 
          this.tweens.add({
 			targets: restart,

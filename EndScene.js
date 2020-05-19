@@ -16,7 +16,7 @@ class EndScene extends Phaser.Scene{
         board.setInteractive();
         board.on('pointerdown',()=>{
 			this.scene.stop('EndScene')
-			this.scene.start('GameScene')
+			this.scene.start('StartScene')
 		})
 
 		const sides = this.physics.add.staticGroup();

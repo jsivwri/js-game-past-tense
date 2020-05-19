@@ -18,6 +18,11 @@ class GameScene extends Phaser.Scene{
 	}
 
 	create() {
+
+				if (!gameState.music.theme){ 
+		gameState.music.theme = this.sound.add('theme', {loop: true});
+		gameState.music.theme.play();
+		}
 		
 		gameState.levelUpScore+=10*Math.floor(70/(gameState.levelSpeed+1))
 
@@ -129,6 +134,10 @@ class GameScene extends Phaser.Scene{
 						gameState.score+=10;
 						gameState.scoreText.setText('Score: '+gameState.score);
 
+						if (gameState.player.getChildren().length==1){
+							gameState.vulnerable=30;
+						}
+
 						// element creation
 						fruit.destroy();
 						gameState.snake.createElement();
@@ -170,14 +179,14 @@ class GameScene extends Phaser.Scene{
 
 					}
 
-				}
-			
-				this.physics.add.collider(gameState.player.getChildren()[0], gameState.player, ()=>{
-					if (gameState.player.getChildren().length>2){
+				}	
+
+				gameState.colliderInit =()=>{
+					this.physics.add.collider(gameState.player.getChildren()[0], gameState.player, ()=>{	
 						gameState.active=false;
 						gameOver();
-						}
-				    })
+					})
+				}
 
 				this.physics.add.collider(sides, gameState.player, ()=>{
 						gameState.active=false;
@@ -191,6 +200,13 @@ class GameScene extends Phaser.Scene{
 				
 		}	
 	update() {
+
+			if(typeof gameState.vulnerable === "number" && gameState.vulnerable>0){
+				gameState.vulnerable--;
+			} else if (typeof gameState.vulnerable === "number" && gameState.vulnerable===0){
+				gameState.vulnerable=null;
+				gameState.colliderInit();
+			}
 
 			if(gameState.score>=gameState.levelUpScore){
 					this.scene.stop('GameScene')
@@ -211,14 +227,6 @@ class GameScene extends Phaser.Scene{
 			}
 		*/
 
-			if (typeof gameState.vulnerable === 'number'){
-				if (gameState.vulnerable>0){
-					gameState.vulnerable--;
-				} else {
-					gameState.vulnerable=true;
-
-				}
-			}
 
 			// pushes the current direction variable into the snake direction array
 			gameState.snake.direction[0].push(gameState.snake.control.dir);
